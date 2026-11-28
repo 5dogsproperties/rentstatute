@@ -369,3 +369,35 @@ details.usecase[open] summary::after { content: "−"; }
   .hero h1 { font-size: 1.55rem; }
   .section { padding: 1.25rem 0; }
 }
+
+/* Round 2 (Nov 28 2026, draft PR; refactoring-ui + Krug). Layout and type only, no wording. */
+/* Title gap: H1 to first section was 72px at 1280. Tighter hero bottom padding, and a smaller top padding on the first section (.lead). */
+@media (min-width: 560px) { .hero { padding: 1.5rem 0 0.5rem; } }
+.section.lead { padding-top: 0.5rem; }
+/* Index: the hero lede is its last element once the notices move below the cards, so it needs no big bottom margin. */
+.hero .lede:last-child { margin-bottom: 0.25rem; }
+.topic-jump ul { margin: 0 0 1rem; font-size: 0.9rem; line-height: 1.45; }
+.topic-jump li { margin: 0 0 0.25rem; }
+/* Breadcrumb: the current page is the one non-link item, so make it the strong one. */
+.crumb-current { color: var(--ink); font-weight: 700; }
+/* Phone contents: a closed dropdown under the title, built from the same list as the desktop TOC. */
+.toc-m { width: min(100% - 2rem, var(--max)); margin: 0.25rem auto 0; background: var(--card); border-radius: var(--radius); box-shadow: 0 1px 3px rgba(20, 50, 79, 0.12), 0 1px 2px rgba(20, 50, 79, 0.08); }
+.toc-m summary { cursor: pointer; display: flex; justify-content: space-between; align-items: center; min-height: 40px; padding: 0 1rem; font-weight: 700; font-size: 0.95rem; color: var(--accent-dark); list-style: none; }
+.toc-m summary::-webkit-details-marker { display: none; }
+.toc-m summary::after { content: "+"; font-weight: 400; font-size: 1.25rem; color: var(--muted); }
+.toc-m[open] summary::after { content: "−"; }
+.toc-m ol { list-style: none; margin: 0; padding: 0 1rem 0.5rem; font-size: 0.95rem; }
+.toc-m li a { display: block; padding: 0.4rem 0; color: var(--accent); }
+@media (min-width: 1240px) { .toc-m { display: none; } }
+/* Phone: 32px tap targets in the header, breadcrumb, footer and index topic list; badge fits on fewer lines. */
+@media (max-width: 559px) {
+  .site-header { padding: 0.3rem 0; }
+  .nav { gap: 0 0.25rem; }
+  .nav a { display: inline-flex; align-items: center; min-height: 32px; padding: 0 0.2rem; }
+  .nav a[href^="mailto:"] { padding: 0 0.5rem; }
+  .toc-m { margin-bottom: 0.5rem; }
+  .crumbs a, .site-footer a { display: inline-block; padding: 0.4rem 0; margin: -0.4rem 0; }
+  .topic-jump li { margin: 0; }
+  .topic-jump a { display: block; padding: 0.4rem 0; }
+  .badge { font-size: 0.7rem; letter-spacing: 0.02em; text-transform: none; line-height: 1.35; border-radius: 12px; }
+}

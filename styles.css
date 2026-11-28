@@ -63,7 +63,7 @@ img { max-width: 100%; height: auto; }
   letter-spacing: -0.02em;
 }
 
-.logo span { font-weight: 500; opacity: 0.85; }
+.logo span { font-weight: 400; opacity: 0.85; }
 
 .nav {
   display: flex;
@@ -128,7 +128,7 @@ img { max-width: 100%; height: auto; }
   background: var(--accent);
   color: #fff !important;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.7rem 1.25rem;
   border-radius: var(--radius);
   border: none;
@@ -216,7 +216,7 @@ details.usecase {
 details.usecase summary {
   cursor: pointer;
   padding: 1rem 1.15rem;
-  font-weight: 650;
+  font-weight: 700;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -331,9 +331,41 @@ details.usecase[open] summary::after { content: "−"; }
 .who li { background: #e6eef6; color: var(--accent-dark); }
 .local-notes { background: #eef3f8; }
 .example { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.15rem; margin: 1rem 0; font-size: 0.95rem; }
-.example .q { font-weight: 650; margin: 0 0 0.5rem; }
+.example .q { font-weight: 700; margin: 0 0 0.5rem; }
 .example cite { display: block; margin-top: 0.6rem; font-style: normal; font-size: 0.85rem; color: var(--muted); }
 .steps { counter-reset: s; list-style: none; padding: 0; margin: 1rem 0; }
 .steps li { counter-increment: s; position: relative; padding-left: 2.4rem; margin-bottom: 0.9rem; }
 .steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
 .badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #fff3cd; color: #7a5c00; padding: 0.2rem 0.55rem; border-radius: 999px; margin-bottom: 0.75rem; }
+
+/* A+ fixes, Nov 28 2026 (draft PR; refactoring-ui + Krug). Layout and type only, no wording. */
+/* L1: fewer borders. Cards already sit on a second background, so drop the border and use a small vertical shadow. */
+.card, .example, details.usecase, .contact-box { border: 0; box-shadow: 0 1px 3px rgba(20, 50, 79, 0.12), 0 1px 2px rgba(20, 50, 79, 0.08); }
+.usecase-body { border-top: 0; }
+/* L4: the header waitlist link reads as the one button in the header (matches only the mailto link inside .nav). */
+.nav a[href^="mailto:"] { display: inline-block; background: #fff; color: var(--accent-dark); font-weight: 700; padding: 0.1rem 0.7rem; border-radius: 8px; text-decoration: none; }
+.nav a[href^="mailto:"]:hover { background: #e6eef6; color: var(--accent-dark); text-decoration: none; }
+/* L5 + U1: on-page contents (built from each page's H2 text) in the right gutter on wide screens; topic jump list on the index. */
+.toc { display: none; }
+@media (min-width: 1240px) {
+  .toc { display: block; position: fixed; top: 86px; left: calc(50% + 384px); width: 196px; max-height: calc(100vh - 110px); overflow-y: auto; font-size: 0.85rem; line-height: 1.35; }
+  .toc ol { list-style: none; margin: 0; padding: 0 0 0 0.85rem; border-left: 3px solid #d6e2ee; }
+  .toc li { margin: 0 0 0.55rem; }
+  .toc a { color: var(--muted); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+}
+.topic-jump ul { list-style: none; margin: 0.25rem 0 1.25rem; padding: 0; font-size: 0.92rem; }
+.topic-jump li { margin: 0 0 0.4rem; break-inside: avoid; }
+@media (min-width: 560px) { .topic-jump ul { columns: 2; column-gap: 1.5rem; } }
+/* L2 + U4: slimmer phone header and tighter phone spacing so the short answer comes up sooner. */
+@media (max-width: 559px) {
+  .site-header { padding: 0.45rem 0; }
+  .site-header .wrap { gap: 0.3rem 1rem; }
+  .logo { font-size: 1rem; }
+  .nav { gap: 0.25rem 0.6rem; }
+  .nav a { font-size: 0.85rem; }
+  .nav a[href^="mailto:"] { padding: 0.1rem 0.5rem; }
+  .hero { padding: 1.25rem 0 0.5rem; }
+  .hero h1 { font-size: 1.55rem; }
+  .section { padding: 1.25rem 0; }
+}
